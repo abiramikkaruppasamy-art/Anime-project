@@ -6,7 +6,7 @@ function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-black" aria-label="Offcanvas navbar large">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">Responsive offcanvas navbar</a>
+        <a className="navbar-brand" href="#">AnimeZone</a>
         <button
           className="navbar-toggler"
           type="button"
