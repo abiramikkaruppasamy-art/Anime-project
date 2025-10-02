@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Footer() {
+  const Navgate = useNavigate();
   const [email, setEmail] = useState('');
 
   const handleSubscribe = (e) => {
@@ -17,25 +19,25 @@ function Footer() {
 
         <ul className="nav justify-content-center mb-4 flex-wrap">
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Home</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/")}}>Home</a>
           </li>
           <li className="nav-item">
             <a className="nav-link text-dark" href="#">About</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Genres</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/Genres")}}>Genres</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Papular</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/papular")}}>Papular</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Romanse</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/romance")}}>Romanse</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Dark</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/dark")}}>Dark</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">Fantasy</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/fantasy")}}>Fantasy</a>
           </li>
         </ul>
 

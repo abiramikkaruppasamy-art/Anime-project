@@ -1,90 +1,85 @@
-// import React from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import Image from "../assets/naruto/id-134494.jpg"
-// import Image5 from "../assets/naruto/id-134496.jpg"
-// import Image7 from "../assets/naruto/id-116734.jpg"
-// import Image6 from "../assets/naruto/id-134493.jpg"
-// import Image1 from "../assets/naruto/id-134496.jpg"
-// import Image2 from "../assets/naruto/id-n-134487.jpg"
-// import Image8 from "../assets/naruto/id-n-142503.jpg"
-// import Image3 from "../assets/naruto/id-n-134485.jpg"
-// import Image4 from "../assets/naruto/id-n-134484.jpg"
+// import React from "react";
+// import { useNavigate } from "react-router-dom";
+// import Image from "../assets/naruto/id-134494.jpg";
+// import Image5 from "../assets/naruto/id-134496.jpg";
+// import Image7 from "../assets/naruto/id-116734.jpg";
+// import Image6 from "../assets/naruto/id-134493.jpg";
+// import Image1 from "../assets/naruto/id-134496.jpg";
+// import Image2 from "../assets/naruto/id-n-134487.jpg";
+// import Image8 from "../assets/naruto/id-n-142503.jpg";
+// import Image3 from "../assets/naruto/id-n-134485.jpg";
+// import Image4 from "../assets/naruto/id-n-134484.jpg";
 
-// function Bleach() {
-  
+// function FairyTail() {
+//   const Navgate = useNavigate();
 //   return (
-
 //     <div className="head">
 //       <div className="head1">
-//       <div className="heleft bg-white">
-//       {/* <h1> */}
-//       {/* <i className="bi bi-arrow-left-circle-fill" role="button" onClick={()=>{Navgate("/Genres")}}></i>Papular </h1> */}
-//       </div>
-//       <div className="blea">
-//       <h1 >Bleach Shonen</h1>
-//       </div>
+//         <div className="heleft bg-white">
+//           {/* <h1> */}
+//           {/* <i className="bi bi-arrow-left-circle-fill" role="button" onClick={()=>{Navgate("/Genres")}}></i>Papular </h1> */}
+//         </div>
+//         <div className="naru">
+//           <h1>Fairy Tail</h1>
+//         </div>
 //       </div>
 
-//     <div className='container'>
-//       <div className="card">
-//       <img src={Image} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image1} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image2} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image3} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image4} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image5} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image6} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image7} alt="images" />
-//       </div>
-//       <div className="card">
-//       <img src={Image8} alt="images" />
+//       <div className="container">
+//         <div className="card">
+//           <img src={Image} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image1} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image2} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image3} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image4} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image5} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image6} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image7} alt="images" />
+//         </div>
+//         <div className="card">
+//           <img src={Image8} alt="images" />
+//         </div>
 //       </div>
 //     </div>
-//     </div>
-//   )
+//   );
 // }
 
-// export default Bleach
-
-
-
-
+// export default FairyTail;
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AnimeModal from "./AnimeModal";
 
-const animeId = 269; // Bleach
+const animeId = 6702; // Fairy Tail
 const numCards = 9;
 
 // Custom messages for each card
-const bleachMessages = [
-  "Ichigo battles Hollows!",
-  "Rukia trains Ichigo!",
-  "The Soul Society arc begins!",
-  "Byakuya confronts Ichigo!",
-  "Orihime's powers awaken!",
-  "Aizen reveals his betrayal!",
-  "Ichigo masters Bankai!",
-  "The Quincy invasion starts!",
-  "Urahara's secret past!",
+const fairyTailMessages = [
+  "Natsu fights a dragon!",
+  "Lucy joins Fairy Tail!",
+  "The S-Class trials begin!",
+  "Erza's armor shines!",
+  "Gray vs. Lyon!",
+  "The Grand Magic Games start!",
+  "Natsu masters Fire Dragon mode!",
+  "Happily ever after!",
+  "Makarov’s leadership shines!",
 ];
 
-function Bleach() {
+function FairyTail() {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(null);
   const [animeDataList, setAnimeDataList] = useState([]);
@@ -107,7 +102,9 @@ function Bleach() {
         );
       } catch (error) {
         console.error("API Error:", error);
-        setAnimeDataList(new Array(numCards).fill("/assets/naruto/id-269.jpg")); // Fallback
+        setAnimeDataList(
+          new Array(numCards).fill("/assets/naruto/id-6702.jpg")
+        ); // Fallback
       }
     };
     fetchAnimePictures();
@@ -132,8 +129,8 @@ function Bleach() {
 
   const handleCardClick = (index) => {
     setSelectedId(animeId);
-    setSelectedMessage(bleachMessages[index]);
-    setSelectedImage(animeDataList[index] || "/assets/naruto/id-269.jpg"); // Set the card's image
+    setSelectedMessage(fairyTailMessages[index]);
+    setSelectedImage(animeDataList[index] || "/assets/naruto/id-6702.jpg"); // Set the card's image
     fetchAnimeData(animeId);
   };
 
@@ -151,8 +148,8 @@ function Bleach() {
         <div className="heleft bg-white">
           {/* Navigation icon can be added similarly if needed */}
         </div>
-        <div className="blea">
-          <h1>Bleach Shonen</h1>
+        <div className="naru">
+          <h1>Fairy Tail</h1>
         </div>
       </div>
 
@@ -164,8 +161,8 @@ function Bleach() {
             onClick={() => handleCardClick(index)}
           >
             <img
-              src={animeDataList[index] || `/assets/naruto/id-269.jpg`}
-              alt={`Bleach ${index + 1}`}
+              src={animeDataList[index] || `/assets/naruto/id-6702.jpg`}
+              alt={`Fairy Tail ${index + 1}`}
             />
           </div>
         ))}
@@ -183,4 +180,4 @@ function Bleach() {
   );
 }
 
-export default Bleach;
+export default FairyTail;
