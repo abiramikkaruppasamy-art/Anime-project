@@ -22,7 +22,7 @@ function Footer() {
             <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/")}}>Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link text-dark" href="#">About</a>
+            <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/about")}}>About</a>
           </li>
           <li className="nav-item">
             <a className="nav-link text-dark" role="button" onClick={()=>{Navgate("/Genres")}}>Genres</a>

@@ -78,7 +78,7 @@ const fairyTailMessages = [
   "Erza's armor shines!",
   "Gray vs. Lyon!",
   "The Grand Magic Games start!",
-  "Natsu masters Fire Dragon mode!",
+  "Natsu masters Fire Dragon mode!", 
   "Happily ever after!",
   "Makarov’s leadership shines!",
 ];

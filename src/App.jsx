@@ -11,7 +11,7 @@ import Fantasyanime from './component/Fantasyanime';
 import Footer from './component/Footer';
 import Gate from './component/Gate';
 import Genres from './component/Genres';
-import Header from './component/Header';
+import Navbar from './component/Navbar';
 import Homepage from './component/Homepage';
 import Hornimiya from './component/Hornimiya';
 import Konosuda from './component/Konosuda';
@@ -24,6 +24,7 @@ import Romanceanime from './component/Romanceanime';
 import Swordart from './component/Swordart';
 import Tokyoghoul from './component/Tokyoghoul';
 import Toradora from './component/Toradora';
+import About from './component/About';
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -31,8 +32,8 @@ import Toradora from './component/Toradora';
 function App() {
   return (
     <div>
-      {/* <Navbar/> */}
-      <Header/>
+      <Navbar/>
+      {/* <Header/> */}
      
       
       <Routes>
@@ -60,6 +61,7 @@ function App() {
       <Route path="/bleach" element={<Bleach/>} />
       <Route path="/toradora" element={<Toradora/>} />
       <Route path="/swordart" element={<Swordart/>} />
+        <Route path='/about' element={<About/>}/>
       </Routes>
       <Footer/>
     </div>
