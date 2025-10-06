@@ -1,6 +1,8 @@
-import React from "react";
 
-function AnimeModal({ anime, message, cardImage, onClose }) {
+import React from "react";
+import "../index.css"; // Import the CSS file
+
+function AnimeModal({ anime, cardImage, onClose }) {
   if (!anime) return null;
 
   return (
@@ -17,22 +19,14 @@ function AnimeModal({ anime, message, cardImage, onClose }) {
         </div>
         <div className="modal-body">
           <img
-            src={
-              cardImage ||
-              anime.images?.jpg?.large_image_url ||
-              "/placeholder.jpg"
-            }
+            src={cardImage || "/placeholder.jpg"}
             alt={anime.title}
             className="modal-image"
           />
           <div className="modal-details">
             <p>
-              <strong>Message:</strong>{" "}
-              {message || "No special message available."}
-            </p>
-            <p>
               <strong>Synopsis:</strong>{" "}
-              {anime.synopsis || "No synopsis available."}
+              {anime.synopsis.substring(0, 200) || "No synopsis available."}...
             </p>
             <p>
               <strong>Episodes:</strong> {anime.episodes || "Unknown"}
@@ -42,11 +36,14 @@ function AnimeModal({ anime, message, cardImage, onClose }) {
               {anime.score ? `${anime.score}/10` : "N/A"}
             </p>
             <p>
-              <strong>Genres:</strong>{" "}
-              {anime.genres?.map((g) => g.name).join(", ") || "N/A"}
+              <strong>Members:</strong> {anime.members}
             </p>
             <p>
-              <strong>Year:</strong> {anime.year || "Unknown"}
+              <strong>Favorites:</strong> {anime.favorites}
+            </p>
+            <p>
+              <strong>Genres:</strong>{" "}
+              {anime.genres?.map((g) => g.name).join(", ") || "N/A"}
             </p>
           </div>
         </div>

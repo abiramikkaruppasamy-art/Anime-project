@@ -1,23 +1,21 @@
-
-.container-fluid{
+.container-fluid {
   background-color: black;
 }
 
-.nav-link{
+.nav-link {
   color: white;
-
 }
-.form-control{
+.form-control {
   border-radius: 60px;
 }
-.text{
+.text {
   /* position: absolute;
   left: 1220px;
   top: 350px; */
   /* border: 2px solid ; */
   /* height: 190px;
   width: 460px; */
-  padding: 50px 5px ;
+  padding: 50px 5px;
   border-radius: 74px;
   /* background-color: black; */
   color: white;
@@ -26,17 +24,15 @@
   /* box-shadow: 0px 0px 30px black; */
   /* border: 2px solid black; */
   background: linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0.6));
-
-  
 }
-.text1{
+.text1 {
   position: absolute;
   left: 1300px;
   top: 550px;
-  border: 2px solid ;
+  border: 2px solid;
   height: 70px;
   width: 308px;
-  padding: 10px 30px ;
+  padding: 10px 30px;
   border-radius: 24px;
   font-size: 33px;
   background-color: black;
@@ -52,26 +48,24 @@
   padding-right: 10px;
   color: #f1cf54;
 }
-  .wi {
+.wi {
   padding-left: 80px;
   color: #f1cf54;
   font-size: 60px;
-
 }
-.section-body{
+.section-body {
   background-color: black;
   color: white;
   padding: 50px 70px;
-
 }
 
- li{
+li {
   list-style: none;
 }
 /* .homepage{
   
 } */
-.pimg{
+.pimg {
   height: 300px;
   width: 150px;
   padding-top: 25px;
@@ -80,15 +74,14 @@
   z-index: -1;
 } */
 /* #img-Naruto */
-.container{
+.container {
   display: flex;
   width: 100%;
   height: 540px;
   margin: 70px 100px;
   /* gap: 5px; */
-
 }
-.card{
+.card {
   flex: 1;
   min-width: 100px;
   height: 100%;
@@ -96,15 +89,15 @@
   overflow: hidden;
   cursor: pointer;
 }
-.card img{
-  width:100%;
+.card img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.container:hover .card{
+.container:hover .card {
   flex: 0.1;
 }
-.container .card:hover{
+.container .card:hover {
   flex: 5;
 }
 .heleft {
@@ -118,12 +111,10 @@
 /* .container{
   margin: 100px;
 } */
-.head1{
+.head1 {
   display: flex;
-  
-  
 }
-.naru{
+.naru {
   position: relative;
   left: 400px;
   border: 2px solid;
@@ -132,9 +123,8 @@
   border-radius: 24px;
   width: 200px;
   text-align: center;
-  
 }
-.sword{
+.sword {
   position: relative;
   left: 400px;
   border: 2px solid;
@@ -143,9 +133,8 @@
   border-radius: 24px;
   width: 350px;
   text-align: center;
-  
 }
-.blea{
+.blea {
   position: relative;
   left: 350px;
   border: 2px solid;
@@ -154,9 +143,8 @@
   border-radius: 24px;
   width: 370px;
   text-align: center;
-  
 }
-.death{
+.death {
   position: relative;
   left: 350px;
   border: 2px solid;
@@ -165,23 +153,22 @@
   border-radius: 24px;
   width: 250px;
   text-align: center;
-  
 }
-.anime{
+.anime {
   margin: 50px;
 }
 /* .dropdown-item{
   margin: 100px;
 } */
-.head{
+.head {
   margin: 50px 0px;
 }
-.contain{
+.contain {
   background-color: #d4d3c5;
   /* color: white; */
   padding: 0px 100px;
 }
-.control{
+.control {
   width: 40%;
 }
 /* a .bi{  
@@ -194,7 +181,7 @@
 ul.d-flex li.ms-3 i.bi {
   font-size: 2rem;
 }
-.container-fluid-bg{
+.container-fluid-bg {
   background-color: #f1cf54;
 }
 
