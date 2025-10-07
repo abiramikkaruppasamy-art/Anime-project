@@ -13,7 +13,7 @@ import Gate from './component/Gate';
 import Genres from './component/Genres';
 import Navbar from './component/Navbar';
 import Homepage from './component/Homepage';
-import Hornimiya from './component/Hornimiya';
+
 import Konosuda from './component/Konosuda';
 import Monster from './component/Monster';
 import Naruto from './component/Naruto';
@@ -25,6 +25,7 @@ import Swordart from './component/Swordart';
 import Tokyoghoul from './component/Tokyoghoul';
 import Toradora from './component/Toradora';
 import About from './component/About';
+import Horimiya from './component/Horimiya';
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -52,7 +53,8 @@ function App() {
       <Route path="/naruto" element={<Naruto/>} />
       <Route path="/deathnode" element={<Deathnode/>} />
       <Route path="/gate" element={<Gate/>} />
-      <Route path="/horimiya" element={<Hornimiya/>} />
+    
+      <Route path="/horimiya" element={<Horimiya/>} />
       <Route path="/fairytail" element={<FairyTail/>} />
       <Route path="/tokyoghoul" element={<Tokyoghoul/>} />
       <Route path="/konosuda" element={<Konosuda/>} />

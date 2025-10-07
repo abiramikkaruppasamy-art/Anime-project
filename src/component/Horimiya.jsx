@@ -6,7 +6,7 @@ import AnimeModal from "./AnimeModal";
 // Predefined number of cards
 const numCards = 9;
 
-function Clannad() {
+function Horimiya() {
   const navigate = useNavigate();
   const [animeDataList, setAnimeDataList] = useState([]);
   const [animeList, setAnimeList] = useState([]);
@@ -18,8 +18,9 @@ function Clannad() {
     const fetchAnimeData = async () => {
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=Clannad&limit=10`
-        );
+            `https://api.jikan.moe/v4/anime?q=horimiya&limit=10`,
+            { timeout: 10000 }
+          );
         const data = response.data.data;
         setAnimeList(data);
         // Use images from the search API response
@@ -32,13 +33,13 @@ function Clannad() {
             : [
                 ...images,
                 ...new Array(numCards - images.length).fill(
-                  `/assets/Clannad/id-20.jpg`
+                  `/assets/Horimiya/id-269.jpg`
                 ),
               ]
         ); // Fallback
       } catch (error) {
         console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/Clannad/id-20.jpg`)); // Fallback
+        setAnimeDataList(new Array(numCards).fill(`/assets/Horimiya/id-269.jpg`)); // Fallback
       }
     };
 
@@ -48,7 +49,7 @@ function Clannad() {
   const handleCardClick = (index) => {
     const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/Clannad/id-20.jpg");
+    setSelectedImage(animeDataList[index] || "/assets/Horimiya/id-269.jpg");
     setIsModalOpen(true);
   };
 
@@ -61,18 +62,11 @@ function Clannad() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft">
-          <h1>
-            <i
-              className="bi bi-arrow-left-circle-fill"
-              role="button"
-              onClick={() => navigate("/Genres")}
-            ></i>
-            Romance
-          </h1>
+        <div className="heleft bg-white">
+          {/* Navigation icon can be added similarly if needed */}
         </div>
-        <div className="naru">
-          <h1>Clannad</h1>
+        <div className="blea">
+          <h1>Horimiya</h1>
         </div>
       </div>
 
@@ -83,19 +77,12 @@ function Clannad() {
           Array.from({ length: numCards }, (_, index) => (
             <div
               key={index}
-              className="card mb-4 "
-              style={{
-                // backgroundColor: "#272727",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
+              className="card"
               onClick={() => handleCardClick(index)}
             >
               <img
-                src={animeDataList[index]}
-                alt={`Clannad ${index + 1}`}
-                width="120"
-                style={{ borderRadius: "5px" }}
+                src={animeDataList[index] || `/assets/Horimiya/id-269.jpg`}
+                alt={`Horimiya ${index + 1}`}
               />
             </div>
           ))
@@ -113,4 +100,4 @@ function Clannad() {
   );
 }
 
-export default Clannad;
+export default Horimiya;

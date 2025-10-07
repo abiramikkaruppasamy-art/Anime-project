@@ -1,6 +1,7 @@
 import React from 'react'
 import Clannad from './Clannad'
-import Hornimiya from './Hornimiya'
+import Horimiya from './Horimiya'
+
 import Toradora from './Toradora'
 
 function Romanceanime() {
@@ -8,7 +9,7 @@ function Romanceanime() {
     <div className='anime'>
         <Clannad/>
         <Toradora/>
-        <Hornimiya/>
+       <Horimiya/>
     </div>
   )
 }

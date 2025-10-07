@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeModal from "./AnimeModal";
 
-// Predefined number of cards
-const numCards = 9;
-
 function Bleach() {
   const navigate = useNavigate();
   const [animeDataList, setAnimeDataList] = useState([]);
@@ -13,32 +10,41 @@ function Bleach() {
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const cacheKey = "bleach_api_data";
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const data = JSON.parse(cachedData);
+      setAnimeList(data.animeList);
+      setAnimeDataList(data.images);
+      setIsLoading(false);
+      console.log("Bleach used cached data");
+      return;
+    }
+
     const fetchAnimeData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=bleach&limit=10`
+          `https://api.jikan.moe/v4/anime?q=bleach&limit=10`,
+          { timeout: 10000 }
         );
         const data = response.data.data;
-        setAnimeList(data);
-        // Use images from the search API response
         const images = data
           .map((anime) => anime.images.jpg.image_url)
-          .slice(0, numCards);
-        setAnimeDataList(
-          images.length === numCards
-            ? images
-            : [
-                ...images,
-                ...new Array(numCards - images.length).fill(
-                  `/assets/naruto/id-269.jpg`
-                ),
-              ]
-        ); // Fallback
+          .slice(0, 9);
+        const cacheData = { animeList: data, images };
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+        setAnimeList(data);
+        setAnimeDataList(images);
+        console.log("Bleach fetched images:", images);
       } catch (error) {
-        console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/naruto/id-269.jpg`)); // Fallback
+        console.error("Error fetching Bleach data:", error);
+        setAnimeDataList([]); // API-only, no fallback
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -46,9 +52,9 @@ function Bleach() {
   }, []);
 
   const handleCardClick = (index) => {
-    const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
+    const matchingAnime = animeList[index % animeList.length] || animeList[0];
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/naruto/id-269.jpg");
+    setSelectedImage(animeDataList[index] || animeDataList[0]);
     setIsModalOpen(true);
   };
 
@@ -57,6 +63,8 @@ function Bleach() {
     setSelectedAnime(null);
     setSelectedImage("");
   };
+
+  const numCards = animeDataList.length;
 
   return (
     <div className="head">
@@ -70,8 +78,10 @@ function Bleach() {
       </div>
 
       <div className="container">
-        {animeDataList.length === 0 ? (
+        {isLoading ? (
           <p className="text-center">Loading...</p>
+        ) : numCards === 0 ? (
+          <p className="text-center">No images available from API.</p>
         ) : (
           Array.from({ length: numCards }, (_, index) => (
             <div
@@ -80,8 +90,12 @@ function Bleach() {
               onClick={() => handleCardClick(index)}
             >
               <img
-                src={animeDataList[index] || `/assets/naruto/id-269.jpg`}
+                src={animeDataList[index]}
                 alt={`Bleach ${index + 1}`}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  console.log(`Bleach image failed for index ${index}`);
+                }}
               />
             </div>
           ))
