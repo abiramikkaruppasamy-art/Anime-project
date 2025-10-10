@@ -6,7 +6,7 @@ import HorimiyaImg from '../assets/horimiya.jpg';
 import HoriImg from '../assets/hori.jpg';
 
 // Predefined number of cards
-const numCards = 9;
+const numCards = 6;
 
 function Horimiya() {
   const navigate = useNavigate();

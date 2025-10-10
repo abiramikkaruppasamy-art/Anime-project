@@ -4,7 +4,7 @@ import axios from "axios";
 import AnimeModal from "./AnimeModal";
 import ClannadI from "../assets/clannad.jpg"
 // Predefined number of cards
-const numCards = 9;
+const numCards = 6;
 
 function Clannad() {
   const navigate = useNavigate();

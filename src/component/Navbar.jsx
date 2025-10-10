@@ -14,14 +14,14 @@ function Header() {
     clannad: "/clannad",
     toradora: "/toradora",
     horimiya: "/horimiya",
-    deathnote: "/deathnode",
+    deathnote: "/deathnote",
     tokyoghoul: "/tokyoghoul",
     monster: "/monster",
     swordart: "/swordart",
-    swordartonline: "/swordart", 
+   
     gate: "/gate",
     konosuba: "/konosuda",
-    konosuda: "/konosuda",
+   
     papular: "/papular",
     romance: "/romance",
     dark: "/dark",
@@ -35,6 +35,7 @@ function Header() {
     if (!searchQuery.trim()) return;
 
     const query = searchQuery.trim().toLowerCase();
+    const firstLetter = query[0];
     const matchedRoute =
       Object.keys(keywordRoutes).find((key) => key.includes(query)) || "/";
     navigate(keywordRoutes[matchedRoute]);
@@ -93,7 +94,7 @@ function Header() {
                   Home
                 </a>
               </li>
-              <li className="nav-item dropdown">
+              {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -270,7 +271,7 @@ function Header() {
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"

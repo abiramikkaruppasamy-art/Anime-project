@@ -4,7 +4,7 @@ import axios from "axios";
 import AnimeModal from "./AnimeModal";
 
 // Predefined number of cards
-const numCards = 9;
+const numCards = 6;
 
 function Swordart() {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ function Swordart() {
             >
               <img
                 src={animeDataList[index]}
-                alt={`Naruto ${index + 1}`}
+                alt={`Sword ${index + 1}`}
                 width="120"
                 style={{ borderRadius: "5px" }}
               />

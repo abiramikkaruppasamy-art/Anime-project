@@ -36,7 +36,7 @@ function FairyTail() {
         const data = response.data.data;
         const images = data
           .map((anime) => anime.images.jpg.image_url)
-          .slice(0, 6);
+          .slice(0, numCards);
         const cacheData = { animeList: data, images };
         localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         setAnimeList(data);
@@ -66,7 +66,7 @@ function FairyTail() {
     setSelectedImage("");
   };
 
-  const numCards = animeDataList.length;
+  const numCards =6;
 
   return (
     <div className="head">
