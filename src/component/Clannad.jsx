@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeModal from "./AnimeModal";
-
+import ClannadI from "../assets/clannad.jpg"
 // Predefined number of cards
 const numCards = 9;
 
@@ -18,13 +18,13 @@ function Clannad() {
     const fetchAnimeData = async () => {
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=Clannad&limit=10`
+          `https://api.jikan.moe/v4/anime?q=clannad&limit=10`
         );
         const data = response.data.data;
-        setAnimeList(data);
+        setAnimeList(data); 
         // Use images from the search API response
         const images = data
-          .map((anime) => anime.images.jpg.image_url)
+          .map((anime) => anime?.images?.jpg.image_url)
           .slice(0, numCards);
         setAnimeDataList(
           images.length === numCards
@@ -32,13 +32,14 @@ function Clannad() {
             : [
                 ...images,
                 ...new Array(numCards - images.length).fill(
-                  `/assets/Clannad/id-20.jpg`
+                  ClannadI
                 ),
+
               ]
         ); // Fallback
       } catch (error) {
         console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/Clannad/id-20.jpg`)); // Fallback
+        setAnimeDataList(new Array(numCards).fill(ClannadI)); // Fallback
       }
     };
 
@@ -48,7 +49,7 @@ function Clannad() {
   const handleCardClick = (index) => {
     const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/Clannad/id-20.jpg");
+    setSelectedImage(animeDataList[index] || ClannadI);
     setIsModalOpen(true);
   };
 

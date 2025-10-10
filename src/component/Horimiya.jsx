@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeModal from "./AnimeModal";
+import HorimiyaImg from '../assets/horimiya.jpg';
+import HoriImg from '../assets/hori.jpg';
 
 // Predefined number of cards
 const numCards = 9;
@@ -23,23 +25,26 @@ function Horimiya() {
           );
         const data = response.data.data;
         setAnimeList(data);
-        // Use images from the search API response
+        
         const images = data
-          .map((anime) => anime.images.jpg.image_url)
-          .slice(0, numCards);
+          .map((anime) => anime?.images?.jpg?.image_url)
+          .filter((url)=>url);
+          // .slice(0, numCards);
+          const fallbackImages = Array(numCards - images.length)
+          .fill()
+          .map((_, i) => (i % 2 === 0 ? HorimiyaImg : HoriImg));
         setAnimeDataList(
-          images.length === numCards
-            ? images
-            : [
-                ...images,
-                ...new Array(numCards - images.length).fill(
-                  `/assets/Horimiya/id-269.jpg`
-                ),
-              ]
-        ); // Fallback
+          images.length === numCards ? images : [...images, ...fallbackImages]
+        );
       } catch (error) {
         console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/Horimiya/id-269.jpg`)); // Fallback
+        setError("Failed to load anime data. Showing default images.");
+        
+        setAnimeDataList(
+          Array(numCards)
+            .fill()
+            .map((_, i) => (i % 2 === 0 ? HorimiyaImg : HoriImg))
+        );
       }
     };
 
@@ -47,9 +52,9 @@ function Horimiya() {
   }, []);
 
   const handleCardClick = (index) => {
-    const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
+    const matchingAnime = animeList[index % animeList.length] || animeList[0]; 
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/Horimiya/id-269.jpg");
+    setSelectedImage(animeDataList[index] || (index % 2 === 0 ? HorimiyaImg : HoriImg));
     setIsModalOpen(true);
   };
 
@@ -81,7 +86,7 @@ function Horimiya() {
               onClick={() => handleCardClick(index)}
             >
               <img
-                src={animeDataList[index] || `/assets/Horimiya/id-269.jpg`}
+                src={animeDataList[index] ||(index % 2 === 0 ? HorimiyaImg : HoriImg)}
                 alt={`Horimiya ${index + 1}`}
               />
             </div>

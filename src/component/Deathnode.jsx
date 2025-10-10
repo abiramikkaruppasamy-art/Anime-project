@@ -93,7 +93,7 @@ function Deathnode() {
             >
               <img
                 src={animeDataList[index]}
-                alt={`Naruto ${index + 1}`}
+                alt={`Deathnode ${index + 1}`}
                 width="120"
                 style={{ borderRadius: "5px" }}
               />

@@ -4,7 +4,7 @@ import axios from "axios";
 import AnimeModal from "./AnimeModal";
 
 // Predefined number of cards
-const numCards = 9;
+const numCards = 6;
 
 function Naruto() {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ function Naruto() {
   };
 
   return (
-    <div className="head">
+    <div className="head" >
       <div className="head1">
         <div className="heleft">
           <h1>

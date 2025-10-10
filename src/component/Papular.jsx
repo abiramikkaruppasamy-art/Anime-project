@@ -22,7 +22,7 @@ function Papular() {
             <img src={Img7}className='pimg' alt=""/>
             <img src={Img4}className='pimg' alt=""/>
             <img src={Img5}className='pimg' alt=""/>
-            <img src={Img6}className='pimg' alt=""/>
+            {/* <img src={Img6}className='pimg' alt=""/> */}
            <i className="wi bi-arrow-right-circle-fill" role="button" onClick={()=>{Navgate("/papularanime")}}></i>
          
         </div>

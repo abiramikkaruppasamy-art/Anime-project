@@ -20,7 +20,7 @@ function Homepage() {
           style={{ objectFit: 'cover', filter: 'brightness(70%)' }}
         />
         <div className="position-absolute top-50 start-50 translate-middle px-3">
-          <h1 className='text' style={{ fontSize: 'clamp(1.5rem, 5vw, 3rem)', color: '#FFD700', fontWeight: 'bold', marginBottom: '1rem' }}>
+          <h1 className='text' style={{ fontSize: 'langer', color: '#FFD700', fontWeight: 'bold', marginBottom: '1rem' }}>
             All your anime in one place. Start watching now!
           </h1>
           <h2 style={{ fontSize: 'clamp(1rem, 3vw, 1.5rem)' }}>

@@ -1,6 +1,6 @@
 
 import React from "react";
-import "../index.css"; // Import the CSS file
+import "../index.css"; 
 
 function AnimeModal({ anime, cardImage, onClose }) {
   if (!anime) return null;
@@ -26,7 +26,7 @@ function AnimeModal({ anime, cardImage, onClose }) {
           <div className="modal-details">
             <p>
               <strong>Synopsis:</strong>{" "}
-              {anime.synopsis.substring(0, 200) || "No synopsis available."}...
+              {anime.synopsis.substring(0, 300) || "No synopsis available."}...
             </p>
             <p>
               <strong>Episodes:</strong> {anime.episodes || "Unknown"}
