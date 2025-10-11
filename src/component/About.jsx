@@ -18,9 +18,9 @@ function About() {
         </p>
       </div>
 
-      {/* Intro Section */}
+      
       <div className="row align-items-center mb-5 px-4">
-        <div className="col-md-6 mb-4 mb-md-0">
+        <div className="col-md-5 mb-4 mb-md-0">
           <div
             id="carouselExampleAutoplaying"
             className="carousel slide"
@@ -28,13 +28,13 @@ function About() {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={Image123} className="d-block w-100" height={600} width={1000} alt="anime" />
+                <img src={Image123}  style={{height:"400px" , width:"400px"}} className="d-block w-20" height={400} width={400} padding={10} alt="anime" />
               </div>
               <div className="carousel-item">
-                <img src={Image543} className="d-block w-100"height={600} width={1000}  alt="anime" />
+                <img src={Image543} style={{height:"400px" , width:"400px"}} className="d-block w-20"height={400} width={400} padding={10}  alt="anime" />
               </div>
               <div className="carousel-item">
-                <img src={Image23} className="d-block w-100" height={600} width={1000}  alt="anime" />
+                <img src={Image23} style={{height:"400px" , width:"400px"}} className="d-block w-20" height={400} width={400} padding={10}  alt="anime" />
               </div>
             </div>
 
@@ -56,6 +56,7 @@ function About() {
               type="button"
               data-bs-target="#carouselExampleAutoplaying"
               data-bs-slide="next"
+              style={{position:"relative",left:"290px" , top:"-200px"}}
             >
               <span
                 className="carousel-control-next-icon"
@@ -66,7 +67,7 @@ function About() {
           </div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-7">
           <h2 className="text-warning mb-3">Welcome to AnimeZone</h2>
           <p>
             <strong>AnimeZone</strong> is a creative space made by anime fans for anime fans.
@@ -90,52 +91,6 @@ function About() {
         </p>
       </div>
 
-      {/* Feature Section */}
-      <div className="row text-dark px-4">
-        <div className="col-md-3 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body text-center">
-              <h5 className="card-title text-primary">Explore Anime</h5>
-              <p className="card-text">
-                Browse through popular and classic anime series with detailed info and images.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body text-center">
-              <h5 className="card-title text-primary">Character Details</h5>
-              <p className="card-text">
-                Discover your favorite anime characters and their incredible stories.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body text-center">
-              <h5 className="card-title text-primary">Anime Updates</h5>
-              <p className="card-text">
-                Stay updated with the latest anime releases, news, and recommendations.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <div className="card h-100 shadow">
-            <div className="card-body text-center">
-              <h5 className="card-title text-primary">Community Zone</h5>
-              <p className="card-text">
-                Join other anime fans, share thoughts, and celebrate anime together.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

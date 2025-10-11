@@ -87,21 +87,27 @@
   margin: 70px;
   position: relative;
   left: 160px;
-  /* gap: 5px; */
+  gap: 5px;
 
 }
 .card{
+ 
   flex: 1;
   min-width: 100px;
   height: 80%;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 .card img{
   width:100%;
   height:100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.card:hover .Card img{
+ transform: scale(1.1);
 }
 .container:hover .card{
   flex: 1.0;
