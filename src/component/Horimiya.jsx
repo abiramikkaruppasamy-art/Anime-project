@@ -67,9 +67,7 @@ function Horimiya() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft bg-white">
-          {/* Navigation icon can be added similarly if needed */}
-        </div>
+        
         <div className="blea">
           <h1>Horimiya</h1>
         </div>

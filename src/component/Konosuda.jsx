@@ -13,10 +13,21 @@ function Konosuda() {
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isLoading,setIsLoading]=useState(true);
   useEffect(() => {
+    const cacheKey = "konosuda_api_data";
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData)  {
+      const data = JSON.parse(cachedData);
+      setAnimeList(data.animeList);
+      setAnimeDataList(data.images);
+      setIsLoading(false);
+      return;
+    }
     const fetchAnimeData = async () => {
+      setIsLoading(true);
       try {
+
         const response = await axios.get(
           `https://api.jikan.moe/v4/anime?q=konosuda&limit=${numCards}`
         );
@@ -26,6 +37,8 @@ function Konosuda() {
         const images = data
           .map((anime) => anime.images.jpg.image_url)
           .slice(0, numCards);
+          const cacheData = {animeList:data, images};
+          localStorage.setItem(cacheKey,JSON.stringify(cacheData));
         setAnimeDataList(
           images.length === numCards
             ? images
@@ -61,9 +74,7 @@ function Konosuda() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft bg-white">
-          {/* Navigation icon can be added similarly if needed */}
-        </div>
+       
         <div className="blea">
           <h1>Konosuda </h1>
         </div>

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeModal from "./AnimeModal";
 
-// Predefined number of cards
 const numCards = 6;
 
 function Deathnode() {
@@ -13,32 +12,48 @@ function Deathnode() {
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const cacheKey = "deathnote_api_data";
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const data = JSON.parse(cachedData);
+      setAnimeList(data.animeList);
+      setAnimeDataList(data.images);
+      setIsLoading(false);
+      return;
+    }
+
     const fetchAnimeData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=Death%20Note&limit=10`
+          `https://api.jikan.moe/v4/anime?q=Death%20Note&limit=10`,
+          { timeout: 10000 }
         );
         const data = response.data.data;
         setAnimeList(data);
-        // Use images from the search API response
         const images = data
           .map((anime) => anime.images.jpg.image_url)
           .slice(0, numCards);
+        const cacheData = { animeList: data, images };
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         setAnimeDataList(
           images.length === numCards
             ? images
             : [
                 ...images,
                 ...new Array(numCards - images.length).fill(
-                  `/assets/naruto/id-20.jpg`
+                  `/assets/deathnote/fallback.jpg`
                 ),
               ]
-        ); // Fallback
+        );
       } catch (error) {
-        console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/naruto/id-20.jpg`)); // Fallback
+        console.error("Error fetching Death Note data:", error);
+        setAnimeDataList(new Array(numCards).fill(`/assets/deathnote/fallback.jpg`));
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -46,9 +61,9 @@ function Deathnode() {
   }, []);
 
   const handleCardClick = (index) => {
-    const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
+    const matchingAnime = animeList[index % animeList.length] || animeList[0];
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/naruto/id-20.jpg");
+    setSelectedImage(animeDataList[index] || "/assets/deathnote/fallback.jpg");
     setIsModalOpen(true);
   };
 
@@ -61,41 +76,48 @@ function Deathnode() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft">
+      <div className="heleft">
           <h1>
             <i
               className="bi bi-arrow-left-circle-fill"
               role="button"
               onClick={() => navigate("/Genres")}
+              aria-label="Go back to Genres"
+              style={{ padding: "10px", fontSize: "clamp(1.5rem, 4vw, 2rem)" }}
             ></i>
-           Dark
+            Dark
           </h1>
         </div>
-        <div className="blea">
-          <h1>Death Node</h1>
+        <div className="death">
+          <h1>Death Note</h1>
         </div>
       </div>
 
       <div className="container">
-        {animeDataList.length === 0 ? (
-          <p className="text-center">Loading...</p>
+        {isLoading ? (
+          <p className="text-center" style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", color: "#f1cf54" }}>
+            Loading...
+          </p>
+        ) : animeDataList.length === 0 ? (
+          <p className="text-center" style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", color: "#f1cf54" }}>
+            No images available from API.
+          </p>
         ) : (
           Array.from({ length: numCards }, (_, index) => (
             <div
               key={index}
-              className="card mb-4 "
-              style={{
-                // backgroundColor: "#272727",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
+              className="card mb-4"
               onClick={() => handleCardClick(index)}
             >
               <img
                 src={animeDataList[index]}
-                alt={`Deathnode ${index + 1}`}
-                width="120"
+                alt={`Death Note ${index + 1}`}
+                loading="lazy"
                 style={{ borderRadius: "5px" }}
+                onError={(e) => {
+                  e.target.src = "/assets/deathnote/fallback.jpg";
+                  console.log(`Death Note image failed for index ${index}`);
+                }}
               />
             </div>
           ))

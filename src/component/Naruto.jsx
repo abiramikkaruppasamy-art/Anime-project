@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AnimeModal from "./AnimeModal";
 
-// Predefined number of cards
 const numCards = 6;
 
 function Naruto() {
@@ -15,6 +14,15 @@ function Naruto() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    const cacheKey = "naruto_api_data";
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const data = JSON.parse(cachedData);
+      setAnimeList(data.animeList);
+      setAnimeDataList(data.images);
+      return;
+    }
+
     const fetchAnimeData = async () => {
       try {
         const response = await axios.get(
@@ -22,10 +30,11 @@ function Naruto() {
         );
         const data = response.data.data;
         setAnimeList(data);
-        // Use images from the search API response
         const images = data
           .map((anime) => anime.images.jpg.image_url)
           .slice(0, numCards);
+        const cacheData = { animeList: data, images };
+        localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         setAnimeDataList(
           images.length === numCards
             ? images
@@ -35,10 +44,10 @@ function Naruto() {
                   `/assets/naruto/id-20.jpg`
                 ),
               ]
-        ); // Fallback
+        );
       } catch (error) {
         console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/naruto/id-20.jpg`)); // Fallback
+        setAnimeDataList(new Array(numCards).fill(`/assets/naruto/id-20.jpg`));
       }
     };
 
@@ -46,7 +55,7 @@ function Naruto() {
   }, []);
 
   const handleCardClick = (index) => {
-    const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
+    const matchingAnime = animeList[index % animeList.length] || animeList[0];
     setSelectedAnime(matchingAnime);
     setSelectedImage(animeDataList[index] || "/assets/naruto/id-20.jpg");
     setIsModalOpen(true);
@@ -59,7 +68,7 @@ function Naruto() {
   };
 
   return (
-    <div className="head" >
+    <div className="head">
       <div className="head1">
         <div className="heleft">
           <h1>
@@ -67,6 +76,8 @@ function Naruto() {
               className="bi bi-arrow-left-circle-fill"
               role="button"
               onClick={() => navigate("/Genres")}
+              aria-label="Go back to Genres"
+              style={{ padding: "10px", fontSize: "clamp(1.5rem, 4vw, 2rem)" }}
             ></i>
             Popular
           </h1>
@@ -78,23 +89,20 @@ function Naruto() {
 
       <div className="container">
         {animeDataList.length === 0 ? (
-          <p className="text-center">Loading...</p>
+          <p className="text-center" style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", color: "#f1cf54" }}>
+            Loading...
+          </p>
         ) : (
           Array.from({ length: numCards }, (_, index) => (
             <div
               key={index}
-              className="card mb-4 "
-              style={{
-                // backgroundColor: "#272727",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
+              className="card mb-4"
               onClick={() => handleCardClick(index)}
             >
               <img
                 src={animeDataList[index]}
                 alt={`Naruto ${index + 1}`}
-                width="120"
+                loading="lazy"
                 style={{ borderRadius: "5px" }}
               />
             </div>

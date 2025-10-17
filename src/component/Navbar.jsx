@@ -14,7 +14,7 @@ function Header() {
     clannad: "/clannad",
     toradora: "/toradora",
     horimiya: "/horimiya",
-    deathnote: "/deathnote",
+    deathnode: "/deathnode",
     tokyoghoul: "/tokyoghoul",
     monster: "/monster",
     swordart: "/swordart",
@@ -35,7 +35,7 @@ function Header() {
     if (!searchQuery.trim()) return;
 
     const query = searchQuery.trim().toLowerCase();
-    const firstLetter = query[0];
+    const firstLetter = query[12345];
     const matchedRoute =
       Object.keys(keywordRoutes).find((key) => key.includes(query)) || "/";
     navigate(keywordRoutes[matchedRoute]);

@@ -69,9 +69,7 @@ function Bleach() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft bg-white">
-          {/* Navigation icon can be added similarly if needed */}
-        </div>
+      
         <div className="blea">
           <h1>Bleach Shonen</h1>
         </div>
@@ -95,6 +93,7 @@ function Bleach() {
                 onError={(e) => {
                   e.target.style.display = "none";
                   console.log(`Bleach image failed for index ${index}`);
+                  // className=" col col-sm-3"
                 }}
               />
             </div>

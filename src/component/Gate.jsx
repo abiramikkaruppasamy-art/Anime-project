@@ -13,12 +13,23 @@ function Gate() {
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [selectedImage, setSelectedImage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading,setIsLoading]=useState(true);
 
   useEffect(() => {
+    const cacheKey = "gate_api_data";
+    const cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+      const data = JSON.parse(cachedData);
+      setAnimeList(data.animeList);
+      setAnimeDataList(data.images);
+      setIsLoading(false);
+      return;
+    }
     const fetchAnimeData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://api.jikan.moe/v4/anime?q=gate&limit=${numCards}`
+          `https://api.jikan.moe/v4/anime?q=gate&limit=10`
         );
         const data = response.data.data;
         setAnimeList(data);
@@ -26,19 +37,23 @@ function Gate() {
         const images = data
           .map((anime) => anime.images.jpg.image_url)
           .slice(0, numCards);
+          const cacheData = {animeList:data,images};
+          localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         setAnimeDataList(
           images.length === numCards
             ? images
             : [
                 ...images,
                 ...new Array(numCards - images.length).fill(
-                  `/assets/naruto/id-269.jpg`
+                  `/assets/gate/fallback.jpg`
                 ),
               ]
         ); // Fallback
       } catch (error) {
         console.error("Error fetching anime data:", error);
-        setAnimeDataList(new Array(numCards).fill(`/assets/naruto/id-269.jpg`)); // Fallback
+        setAnimeDataList(new Array(numCards).fill(`/assets/gate/fallback.jpg`)); // Fallback
+      }finally{
+        setIsLoading(false);
       }
     };
 
@@ -48,7 +63,7 @@ function Gate() {
   const handleCardClick = (index) => {
     const matchingAnime = animeList[index % animeList.length] || animeList[0]; // Cycle through or default to first
     setSelectedAnime(matchingAnime);
-    setSelectedImage(animeDataList[index] || "/assets/naruto/id-269.jpg");
+    setSelectedImage(animeDataList[index] || "/assets/gate/fallback.jpg");
     setIsModalOpen(true);
   };
 
@@ -61,9 +76,7 @@ function Gate() {
   return (
     <div className="head">
       <div className="head1">
-        <div className="heleft bg-white">
-          {/* Navigation icon can be added similarly if needed */}
-        </div>
+      
         <div className="naru">
           <h1>Gate </h1>
         </div>
@@ -76,7 +89,7 @@ function Gate() {
           Array.from({ length: numCards }, (_, index) => (
             <div
               key={index}
-              className="card"
+              className="card mb-4"
               onClick={() => handleCardClick(index)}
             >
               <img
